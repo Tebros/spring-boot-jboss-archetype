@@ -114,5 +114,11 @@
         <system>GitHub Issues</system>
         <url>https://github.com/Tebros/spring-boot-jboss-archetype/issues</url>
     </issueManagement>
+    <scm>
+        <connection>scm:git:git://github.com/Tebros/spring-boot-jboss-archetype.git</connection>
+        <developerConnection>scm:git:git@github.com:Tebros/spring-boot-jboss-archetype.git</developerConnection>
+        <tag>HEAD</tag>
+        <url>https://github.com/Tebros/spring-boot-jboss-archetype</url>
+    </scm>
 
 </project>
