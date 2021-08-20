@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="TRACE">
+
+    <Properties>
+        <Property name="consoleOutputPattern">%highlight{%d{HH:mm:ss} [%t] %-5level (%logger{36}): %msg%n}</Property>
+        <Property name="fileOutputPattern">%d{DEFAULT} [%t] %-5level (%logger{36}): %msg%n</Property>
+    </Properties>
+
+    <Appenders>
+
+        <Console name="stdout" target="SYSTEM_OUT">
+            <PatternLayout pattern="${consoleOutputPattern}" />
+            <ThresholdFilter level="TRACE" onMatch="ACCEPT" onMismatch="DENY"/>
+        </Console>
+
+        <RollingFile name="rollingFile" fileName="./logs/application-name.log"
+                     bufferedIO="true" bufferSize="4096" immediateFlush="true"
+                     filePattern="./logs/application-name/$${date:yyyy-MM}/application-name_%d{yyyy-MM-dd}-%i.log.zip">
+            <PatternLayout pattern="${fileOutputPattern}" />
+            <Policies>
+                <OnStartupTriggeringPolicy />
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="20 MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="20" compressionLevel="4" />
+        </RollingFile>
+
+    </Appenders>
+
+    <Loggers>
+        <Logger name="org.hibernate" level="info">
+            <AppenderRef ref="rollingFile" level="info" />
+        </Logger>
+        <Logger name="org.springframework" level="info">
+            <AppenderRef ref="rollingFile" level="info" />
+        </Logger>
+        <Root level="TRACE">
+            <AppenderRef ref="rollingFile" />
+        </Root>
+    </Loggers>
+
+</Configuration>
+
